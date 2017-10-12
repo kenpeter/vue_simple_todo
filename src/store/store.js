@@ -34,6 +34,11 @@ const mutations = {
 	},
 
 	EDIT_TODO(state, todo) {
+
+		// test
+		console.log('-- debug --');
+		console.log(todo);
+
 		// From state, get all todos
 	  let todos = state.todos;
 		// Basically, we remove that todo from list, and working on remaining.
@@ -87,7 +92,7 @@ const actions = {
 
 	editTodo(store, todo) {
 		let commit = store.commit;
-		commit('EDIT_TODO');
+		commit('EDIT_TODO', todo);
 	},
 
 	completeTodo(store, todo) {
