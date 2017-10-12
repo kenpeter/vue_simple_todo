@@ -16,11 +16,11 @@ export default{
   // Action on UI
   methods: {
     // event happen on button
-    getTodo(e){
+    getTodo (e) {
       this.$store.dispatch('getTodo', e.target.value)
     },
 
-    addTodo(){
+    addTodo () {
       // this === this component
       // $store === state
       // dispatch
@@ -34,7 +34,7 @@ export default{
 
   // Use computed with part of state
   computed: {
-    newTodo(){
+    newTodo () {
       // this.state.get, curr to do
       return this.$store.getters.newTodo
     }

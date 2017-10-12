@@ -1,17 +1,17 @@
 // vue
-import Vue from 'vue';
+import Vue from 'vue'
 // state
-import Vuex from 'vuex';
+import Vuex from 'vuex'
 
-//vue uses state
-Vue.use(Vuex);
+// vue uses state
+Vue.use(Vuex)
 
 // We need to have full structure of state
 // todo = {body: x, completed: false}
 const state = {
 	todos: [],
 	newTodo: ''
-};
+}
 
 // Mutation
 const mutations = {
@@ -36,8 +36,7 @@ const mutations = {
 	EDIT_TODO(state, todo) {
 		// From state, get all todos
 	  let todos = state.todos;
-		// todos.indexOf(todo) == index,
-		// 1 means remove
+		// Basically, we remove that todo from list, and working on remaining.
 	  todos.splice(todos.indexOf(todo), 1);
 
 		// Now todos get 1 less
@@ -64,8 +63,7 @@ const mutations = {
 	CLEAR_TODO(state){
 	 state.newTodo = '';
 	}
-};
-
+}
 
 const actions = {
 	// {commit} == { commit: commit }, it is argument destruction
@@ -87,36 +85,38 @@ const actions = {
 		commit('CLEAR_TODO');
 	},
 
-	editTodo(store) {
+	editTodo(store, todo) {
 		let commit = store.commit;
-		commit('CLEAR_TODO');
+		commit('EDIT_TODO');
+	},
+
+	completeTodo(store, todo) {
+		let commit = store.commit;
+		commit('COMPLETE_TODO', todo);
+	},
+
+	removeTodo(store, todo) {
+		let commit = store.commit;
+		commit('REMOVE_TODO', todo);
 	}
-};
+}
 
 // Getters becomes keep getting part of state
 const getters = {
 	// curr item
-	newTodo: state => state.newTodo,
-	// Get all not completed tasks
-	// item list filter
-	// fat arrow func, return !completed.
-  todos: state => state.todos.filter(
-		(todo) => { return !todo.completed; }
-	),
-
-	completedTodos: state => state.todos.filter(
-		(todo) => { return todo.completed; }
-	)
-};
+  newTodo: state => state.newTodo,
+  todos: state => state.todos.filter((todo) => { return !todo.completed }),
+  completedTodos: state => state.todos.filter((todo) => { return todo.completed })
+}
 
 // export vue
 // {state: state}
 const store = new Vuex.Store({
-	state: state,
-	actions: actions,
-	mutations: mutations,
-	getters: getters
-});
+  state,
+  actions,
+  mutations,
+  getters
+})
 
 // export store
-export default store;
+export default store

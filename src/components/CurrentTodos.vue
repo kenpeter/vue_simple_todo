@@ -14,10 +14,12 @@
               <span class="glyphicon glyphicon-edit"></span> Edit
             </button>
 
+            <!-- done a todo -->
             <button type="button" @click="complete(todo)" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-ok-circle"></span> Complete
             </button>
 
+            <!-- remove a todo -->
             <button type="button" @click="remove(todo)" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-remove-circle"></span> Remove
             </button>
@@ -31,23 +33,27 @@
 export default{
   methods: {
     // Click button, then call internal method, the fire
-    edit(todo){
+    edit (todo) {
       // this.state.fire(action, payload)
       this.$store.dispatch('editTodo', todo)
     },
 
-    complete(todo){
+    complete (todo) {
+      // Basically, we fire something, with all necessary data, to help
+      // completing todo
       this.$store.dispatch('completeTodo', todo)
     },
 
-    remove(todo){
+    // Remove
+    remove (todo) {
       this.$store.dispatch('removeTodo', todo)
     }
   },
 
   computed: {
     // So we use a func like data, todos, not todos()
-    todos() {
+    todos () {
+      // Get part of state
       return this.$store.getters.todos
     }
   }
